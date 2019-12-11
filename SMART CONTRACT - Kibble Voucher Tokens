@@ -1,5 +1,3 @@
-SMART CONTRACT 
-
 pragma solidity ^0.4.19;
 
 /**
@@ -64,9 +62,6 @@ contract Ownable {
         _;
     }
 
-    /**
-     * @dev Transfer of ownership.
-     */
     function transferOwnership(address newOwner) public isOwner {
         require(newOwner != address(0));
         OwnershipTransferred(owner, newOwner);
@@ -171,36 +166,27 @@ contract ERC20Token is StandardToken, Ownable {
       // This is a constructor function 
     // which means the following function name has to match the contract name declared above
     function ERC20Token() public {
-        decimals        = 0;
-        totalCoin       = 10000000000;                       // Total Supply of Coin
+        decimals        = 18;
+        totalCoin       = 1000050000;                       // Total Supply of Coin
         totalSupply     = totalCoin * 10**uint(decimals); // Total Supply of Coin
         balances[owner] = totalSupply;                    // Total Supply sent to Owner's Address
         exchangeRate    = 12689;                            // 100 Coins per ETH   (changable)
-        symbol          = "KIBBLTM";                       // Your Ticker Symbol  (changable)
-        name            = "Kibble Voucher Tokens";             // Your Coin Name      (changable)
+        symbol          = "KIBL";                       // Your Ticker Symbol  (changable)
+        name            = "KIBBLE Tokens";             // Your Coin Name      (changable)
     }
-    
-    /**
-     * @dev changeTokenName.
-     */
+
     function changeTokenName(string newName) public isOwner returns (bool success) {
         TokenNameChanged(name, newName);
         name = newName;
         return true;
     }
-     
-    /**
-     * @dev changeTokenSymbol.
-     */
+
     function changeTokenSymbol(string newSymbol) public isOwner returns (bool success) {
         TokenSymbolChanged(symbol, newSymbol);
         symbol = newSymbol;
         return true;
     }
-     
-     /**
-     * @dev changeExhangeRate.
-     */
+
     function changeExhangeRate(uint256 newRate) public isOwner returns (bool success) {
         ExhangeRateChanged(exchangeRate, newRate);
         exchangeRate = newRate;
